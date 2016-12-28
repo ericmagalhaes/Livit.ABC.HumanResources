@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Livit.ABC.Application": "1.0.0-*",
+    "Livit.ABC.CommandStack": "1.0.0-*",
+    "Livit.ABC.Domain": "1.0.0-*",
+    "Livit.ABC.Infraestructure": "1.0.0-*",
+    "NETStandard.Library": "1.6.0",
+    "xunit": "2.2.0-beta4-build3444"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+
+ABC multinational company requires a website to all employees request absence or leave
+
+through automated system internally in the company. One of the most important features of
+
+this system is to allow the employee to add absence request so the admin can approve it or
+
+not, after this the absence details must be shared through the user calendar.
+
+ABC has asked you to develop an API back-end using ASP.NET Core, which can:
+
+
+1. Allow the users to login with their Google email.
+
+2. Add an absence request to the system.
+
+3. Allow the Admin can approve or decline the request.
+
+4. Approved requests are shared automatically in the user’s calendar.
