@@ -2,12 +2,18 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "AutoMapper": "5.2.0",
+    "Google.Apis": "1.19.0",
+    "Google.Apis.Auth": "1.19.0",
+    "Google.Apis.Calendar.v3": "1.19.0.705",
+    "Google.Apis.Core": "1.19.0",
     "Livit.ABC.Domain": "1.0.0-*",
     "Livit.ABC.Infraestructure": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {
+   // "net461": {}
     "netstandard1.6": {
       "imports": "dnxcore50"
     }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace Livit.ABC.CommandStack
+namespace Livit.ABC.CommandStack.Commands
 {
     public class RequestAbsenceCommand : IdentityCommand
     {
@@ -17,6 +13,11 @@ namespace Livit.ABC.CommandStack
         /// end of absence
         /// </summary>
         public DateTime EndDate { get; private set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description { get; set; }
         
         /// <summary>
         /// Initiate a new absence command

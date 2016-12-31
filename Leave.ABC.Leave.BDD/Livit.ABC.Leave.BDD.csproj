@@ -77,6 +77,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="RequestApprovalSpec.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestApprovalSpec.feature</DependentUpon>
+    </Compile>
     <Compile Include="tests\AbsenceRequestSteps.cs" />
     <Compile Include="Approve HR Request.feature.cs">
       <AutoGen>True</AutoGen>
@@ -113,6 +118,10 @@
       <LastGenOutput>AbsenceRequestSpec.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="RequestApprovalSpec.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RequestApprovalSpec.feature.cs</LastGenOutput>
+    </None>
     <None Include="runtests.cmd" />
     <None Include="SpecRunTestProfile.xsd">
       <SubType>Designer</SubType>

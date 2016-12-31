@@ -1,0 +1,25 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Google.Apis": "1.20.0",
+    "Google.Apis.Auth": "1.20.0",
+    "Google.Apis.Books.v1": "1.20.0.705",
+    "Google.Apis.Calendar.v3": "1.20.0.710",
+    "Google.Apis.Core": "1.20.0",
+    //"Microsoft.NETCore.App": {
+    //  "type": "platform",
+    //  "version": "1.0.1"
+    //}
+  },
+
+  "frameworks": {
+    "net461": {}
+    //"netcoreapp1.0": {
+    //  "imports": "dnxcore50"
+    //}
+  }
+}

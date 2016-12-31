@@ -9,17 +9,21 @@ Scenario: schedule a leave
 	And I have entered the start date and the end date of a new leave
 	When I press add
 	Then the result should be a scheduled leave in personal calendar
+	And the employee manager must be warned by email to approve the request
 
 Scenario: reschedule a leave
 	Given I have selected an existing scheduled leave
 	And I have updated the start date, end date or both
 	When I press reschedule
 	Then the result should be an updated scheduled leave
+	And the employee`s manager must be warned by email 
+	And approve the updated schedule
 
 Scenario: remove a scheduled leave
 	Given I have selected an exising scheduled leave
 	When I press remove
 	Then the result should be a canceled leave
+	And the employee`s manager must be warned by email
 
 Scenario: retrieve a scheduled a leave
 	Given I have entered a scheduled leave identity

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:1398/",
+      "applicationUrl": "http://localhost:8080/",
       "sslPort": 0
     }
   },
@@ -11,17 +11,29 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "http://localhost:8080/Account/ExternalLogin?returnUrl=http://localhost:8080/swagger/ui",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Livit.ABC.LeaveApi": {
+    "dotnet run": {
       "commandName": "Project",
+      "commandLineArgs": "--server.urls=http://localhost:8080",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/api/values",
+      "launchUrl": "http://localhost:8080/Account/ExternalLogin?returnUrl=http://localhost:8080/swagger/ui",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://locahost:8080"
+      }
+    },
+    "dotnet watch": {
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "commandLineArgs": "watch run --server.urls http://locahost:8080",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:8080/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://locahost:8080"
       }
     }
   }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Livit.ABC.CommandStack
+namespace Livit.ABC.CommandStack.Commands
 {
     /// <summary>
     /// reschedule an existing absence
