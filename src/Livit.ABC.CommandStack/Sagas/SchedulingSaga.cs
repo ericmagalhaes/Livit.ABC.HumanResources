@@ -41,7 +41,7 @@ namespace Livit.ABC.CommandStack.Sagas
                 Bus.RaiseEvent(rejected);
                 return;
             }
-            
+            message.RequestId = response.RequestId.ToString();
             var absenceRequest = AbsenceRequest.Factory.Create(
                 response.RequestId.ToString(), 
                 request.RequestedBy,

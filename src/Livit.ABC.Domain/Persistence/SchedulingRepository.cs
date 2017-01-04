@@ -54,5 +54,12 @@ namespace Livit.ABC.Domain.Persistence
                 $"Cannot update ScheduleInfo: ScheduleInfo Id:{scheduleInfo.Id} Task Id:{taskId}";
             return cannotUpdateDatabaseResponse;
         }
+
+        public ScheduleInfo ScheduleInfoByRequest(string requestId)
+        {
+            var scheduleInfos = _repository.ScheduleInfos;
+            var scheduleInfo = scheduleInfos.FirstOrDefault(s => s.TaskActivity.Id == requestId);
+            return scheduleInfo;
+        }
     }
 }

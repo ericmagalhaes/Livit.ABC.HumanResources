@@ -20,10 +20,11 @@ namespace Livit.ABC.Domain.Query
             var taskActivites = _repository.Tasks;
             var schedules = _repository.ScheduleInfos;
             var approvals = _repository.ApprovalTasks;
-
+            var taskId = query.Id;
             var absenceResult = from tasks in taskActivites
                 join sched in schedules on tasks.Id equals sched.TaskActivity.Id
                 join apprv in approvals on tasks.Id equals apprv.TaskActivity.Id
+                where tasks.Id == taskId
                 select new
                 {
                     tasks.Id,

@@ -13,6 +13,8 @@ namespace Livit.ABC.Domain.Persistence
     {
         CommandResponse CreateScheduledingFromRequest(SchedulingRequest request);
         CommandResponse SetScheduleExternalProviderInformation(SchedulingRequest request);
+
+        ScheduleInfo ScheduleInfoByRequest(string requestId);
     }
 }
 

@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using Livit.ABC.Domain.Persistence;
 using Livit.ABC.LeaveApi.Models;
-using Livit.ABC.LeaveApi.Models.AccountViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -33,11 +31,11 @@ namespace Livit.ABC.LeaveApi.Controllers
         }
         [HttpGet]
         [Route("GoogleExternalAuth")]
-        public IActionResult GoogleExternalAuthentication()
+        public string GoogleExternalAuthentication()
         {
             var request = HttpContext.Request;
-            var redirect = "${request.Host}"+"/swagger/ui";
-            
+            var redirect = $"{request.Scheme}://{request.Host}/Account/ExternalLogin?provider=Google&returnUrl={request.Scheme}://{request.Host}/Swagger/ui";
+            return redirect;
         }
 
         [HttpGet]
@@ -72,7 +70,7 @@ namespace Livit.ABC.LeaveApi.Controllers
             var hasLogin = await _userManager.FindByEmailAsync(email.Value);
             if (hasLogin == null)
             {
-                var employee = _employeeRepository.RegisterEmployee(email.Value);
+                var employee = _employeeRepository.RegisterEmployee(email.Value,"manager@livit.com");
                 user.EmployeeId = employee.Id;
                 await _userManager.CreateAsync(user);
                 await _userManager.AddLoginAsync(user, info);

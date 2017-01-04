@@ -35,7 +35,18 @@ namespace Livit.ABC.CommandStack.Sagas
             var isApproved = message.IsApproved;
             var managerId = message.ManagerId;
             var request = TaskApprovmentRequest.Factory.Create(requestId, managerId, isApproved);
-            
+            var response = _approvalTaskRepository.SetApprovalTaskStatus(request);
+            if (!response.Success)
+            {
+                var description = response.Description;
+                var rejected = new SetApprovalStatusRejectedEvent(requestId, description);
+                _bus.RaiseEvent(rejected);
+                return;
+            }
+            var created = new SetApprovalStatusCreatedEvent(requestId);
+            _bus.RaiseEvent(created);
+
+
         }
         public void Handle(ScheduleCreatedEvent message)
         {

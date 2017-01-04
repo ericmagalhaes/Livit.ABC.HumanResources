@@ -131,17 +131,14 @@ namespace Livit.ABC.LeaveApi
         }
         private void InitDb(Repository repository)
         {
-            //repository.Database.EnsureDeleted();
+            repository.Database.EnsureDeleted();
             repository.Database.EnsureCreated();
 
             if (!repository.Employees.Any())
             {
                 var manager = new Employee();
-                manager.Id = "manager@leave.com";
-                var user = new Employee();
-                user.Id = "user@leave.com";
-                user.Manager = manager;
-                repository.Employees.Add(user);
+                manager.Id = "manager@livit.com";
+                repository.Employees.Add(manager);
                 repository.SaveChanges();
             }
 
@@ -151,7 +148,7 @@ namespace Livit.ABC.LeaveApi
             config.CreateMap<RequestAbsenceCommand, SchedulingRequest>().ConstructUsing((src, dst) => SchedulingRequest.Factory.Create(src.RequestedBy, src.StartDate, src.EndDate, src.Description));
             config.CreateMap<SchedulingRequest, ScheduleInfo>().ConstructUsing((src, dst) => src.ToScheduleInfo());
             config.CreateMap<AbsenceRequest, ScheduleCreatedEvent>().ConstructUsing(ScheduleCreatedEvent.FromAbsenceRequest);
-            config.CreateMap<AbsenceRequest, ScheduleCreatedEvent>().ConstructUsingServiceLocator();
+
             config.CreateMissingTypeMaps = true;
             
 

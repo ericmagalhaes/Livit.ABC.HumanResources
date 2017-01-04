@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Reflection;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Livit.ABC.CommandStack.Commands;
 using Livit.ABC.Domain.Query;
@@ -24,22 +25,31 @@ namespace Livit.ABC.LeaveApi.Controllers
 
         [HttpPost]
         [Route("Absence")]
-        public void RequestAbsence([FromBody]RequestAbsence request)
+        [Produces(typeof(AbsenceSchedulingRequestQueryResult))]
+        
+        public IActionResult RequestAbsence([FromBody]RequestAbsence request)
         {
-            var claimsIdentity = (ClaimsIdentity) User.Identity;
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claimName = claimsIdentity.FindFirst(c => c.Type == ClaimTypes.Name);
             var userName = claimName.Value;
             var command = new RequestAbsenceCommand(
                 userName,
                 request.StartDate,
                 request.EndDate);
+
             _bus.Send(command);
+            var id = command.RequestId;
+            var query = new AbsenceSchedulingRequestQuery();
+            query.Id = id;
+            return CreatedAtRoute("GetRequestAbsence", new {id}, id);
         }
        
         [HttpGet]
-        [Route("Absence/{id}")]
-        public AbsenceSchedulingRequestQueryResult RequestAbsence(AbsenceSchedulingRequestQuery query)
+        [Route("Absence/{id}",Name="GetRequestAbsence")]
+        public AbsenceSchedulingRequestQueryResult RequestAbsence(string id)
         {
+            var query = new AbsenceSchedulingRequestQuery();
+            query.Id = id;
             return _queryDispatcher.Dispatch<AbsenceSchedulingRequestQuery,AbsenceSchedulingRequestQueryResult>(query);
         }
         [HttpPost]

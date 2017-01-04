@@ -4,7 +4,11 @@ namespace Livit.ABC.CommandStack.Commands
 {
     public class RequestAbsenceCommand : IdentityCommand
     {
-        
+        /// <summary>
+        /// RequestId
+        /// Output parameter
+        /// </summary>
+        public string RequestId { get; internal set; }
         /// <summary>
         /// begining of absence
         /// </summary>

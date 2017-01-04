@@ -12,5 +12,4 @@ namespace Livit.ABC.CommandStack.Events
         public string ApprovalTaskId { get; private set; }
         public string RequestId { get; private set; }
     }
-
 }
