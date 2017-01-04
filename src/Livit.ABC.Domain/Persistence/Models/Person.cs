@@ -1,4 +1,4 @@
-namespace Livit.ABC.Domain.Shared
+namespace Livit.ABC.Domain.Persistence.Models
 {
     /// <summary>
     /// Base class for employee Entity

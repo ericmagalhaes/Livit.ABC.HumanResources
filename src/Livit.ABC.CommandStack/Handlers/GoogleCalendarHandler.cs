@@ -1,19 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http.Headers;
-using System.Threading;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
 using Livit.ABC.CommandStack.Events;
 using Livit.ABC.Infraestructure;
 using Livit.ABC.Infraestructure.Framework.CQRS;
 using Livit.ABC.Infraestructure.Framework.EventStore;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Livit.ABC.CommandStack.Handlers
@@ -30,15 +23,10 @@ namespace Livit.ABC.CommandStack.Handlers
        
         public void Handle(ScheduleCreatedEvent message)
         {
-            string[] scopes = { CalendarService.Scope.CalendarReadonly };
-            string ApplicationName = "HR Web";
             var tokenObject = JObject.Parse(_accessTokenService.GetValue());
             var tokenResponse = new TokenResponse();
             tokenResponse.AccessToken = tokenObject.GetValue("AccessToken").Value<string>();
-            tokenResponse.TokenType = tokenObject.GetValue("TokenType").Value<string>();
-            
-
-
+           
             var service = new CalendarService();
             service.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
                 tokenResponse.AccessToken);

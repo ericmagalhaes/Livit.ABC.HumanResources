@@ -70,6 +70,10 @@ namespace Livit.ABC.Domain.Migrations
 
                     b.Property<string>("TaskId");
 
+                    b.Property<string>("ProviderId");
+
+                    b.Property<string>("ProviderScheduleId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TaskId");

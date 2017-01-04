@@ -16,9 +16,7 @@ namespace Livit.ABC.CommandStack.Sagas
     /// </summary>
     public class SchedulingSaga : Saga,
         IStartWithMessage<RequestAbsenceCommand>,
-        IStartWithMessage<RequestLeaveCommand>,
-        IHandleMessage<RescheduleAbsenceCommand>,
-        IHandleMessage<RescheduleLeaveCommand>
+        IStartWithMessage<RequestLeaveCommand>
     {
         private readonly ISchedulingRepository _schedulingRepository = null;
         #region constructors
@@ -50,10 +48,6 @@ namespace Livit.ABC.CommandStack.Sagas
                 request.StartDate, 
                 request.EndDate);
 
-            //var created = new ScheduleCreatedEvent(
-            //    absenceRequest.Id, 
-            //    absenceRequest.RequestedBy, 
-            //    absenceRequest.NeedsApproval);
             var created = MapUtil.Map<AbsenceRequest, ScheduleCreatedEvent>(absenceRequest);
             
             Bus.RaiseEvent(created);
@@ -82,18 +76,6 @@ namespace Livit.ABC.CommandStack.Sagas
         
         #endregion
         
-        #region Handlers
-        public void Handle(RescheduleAbsenceCommand message)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public void Handle(RescheduleLeaveCommand message)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
     
 }

@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 namespace Livit.ABC.LeaveApi.Controllers
 {
     [Route("api/[controller]")]
-   
     public class HumanResourcesController : Controller
     {
         private readonly IBus _bus = null;
@@ -38,10 +37,27 @@ namespace Livit.ABC.LeaveApi.Controllers
         }
        
         [HttpGet]
-        [Route("Absence2/{id}")]
+        [Route("Absence/{id}")]
         public AbsenceSchedulingRequestQueryResult RequestAbsence(AbsenceSchedulingRequestQuery query)
         {
             return _queryDispatcher.Dispatch<AbsenceSchedulingRequestQuery,AbsenceSchedulingRequestQueryResult>(query);
+        }
+        [HttpPost]
+        [Route("Leave")]
+        public void RequestLeave([FromBody]RequestLeave request)
+        {
+            var userName = SecurityInfo.GetUserIdentity(User);
+            var command = new RequestLeaveCommand(
+                userName,
+                request.LeftDate);
+            _bus.Send(command);
+        }
+
+        [HttpGet]
+        [Route("Leave/{id}")]
+        public LeaveSchedulingRequestQueryResult RequestLeave(LeaveSchedulingRequestQuery query)
+        {
+            return _queryDispatcher.Dispatch<LeaveSchedulingRequestQuery, LeaveSchedulingRequestQueryResult>(query);
         }
 
 

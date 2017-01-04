@@ -1,4 +1,5 @@
-﻿using Livit.ABC.Domain.Scheduling;
+﻿using Livit.ABC.Domain.Persistence.Models;
+using Livit.ABC.Domain.Scheduling;
 using Livit.ABC.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 

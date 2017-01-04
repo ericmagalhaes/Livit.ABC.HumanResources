@@ -5,6 +5,7 @@ namespace Livit.ABC.Infraestructure.Framework.CQRS
     public class CommandResponse
     {
         public static CommandResponse Ok = new CommandResponse {Success = true};
+        public static CommandResponse Failed = new CommandResponse { Success = false };
 
         public CommandResponse(Guid requestId = default(Guid), Boolean success = false, string aggregateId = "")
         {

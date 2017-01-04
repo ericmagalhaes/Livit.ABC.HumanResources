@@ -14,6 +14,8 @@ namespace Livit.ABC.Domain.Scheduling
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public string Description { get; private set; }
+        public string Provider { get; private set; }
+        public string ProviderScheduleId { get; private set; }
         
 
         public void Apply(SchedulingRequestCreatedEvent evt)
@@ -22,6 +24,13 @@ namespace Livit.ABC.Domain.Scheduling
             EndDate = evt.EndDate;
             RequestedBy = evt.RequestedBy;
             
+        }
+
+        public void Apply(SchedulingRequestExternalScheduleProviderCreatedEvent evt)
+        {
+            Id = Guid.Parse(evt.RequestId);
+            Provider = evt.Provider;
+            ProviderScheduleId = evt.ProviderScheduleId;
         }
 
         public ScheduleInfo ToScheduleInfo()

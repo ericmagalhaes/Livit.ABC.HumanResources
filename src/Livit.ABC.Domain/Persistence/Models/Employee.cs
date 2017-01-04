@@ -1,3 +1,5 @@
+using Livit.ABC.Domain.Persistence.Models;
+
 namespace Livit.ABC.Domain.Shared
 {
     /// <summary>

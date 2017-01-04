@@ -12,6 +12,7 @@ namespace Livit.ABC.Domain.Persistence
     public interface ISchedulingRepository 
     {
         CommandResponse CreateScheduledingFromRequest(SchedulingRequest request);
+        CommandResponse SetScheduleExternalProviderInformation(SchedulingRequest request);
     }
 }
 

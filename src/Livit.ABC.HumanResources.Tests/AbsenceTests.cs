@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Loader;
 using AutoMapper.Configuration;
 using Livit.ABC.CommandStack.Commands;
-using Livit.ABC.CommandStack.Events;
-using Livit.ABC.CommandStack.Sagas;
 using Livit.ABC.Domain.Persistence;
 using Livit.ABC.Domain.Scheduling;
 using Livit.ABC.Domain.Shared;
 using Livit.ABC.Infraestructure.Broker;
 using Livit.ABC.Infraestructure.Framework.CQRS;
-using Livit.ABC.Infraestructure.Framework.EventStore;
 using Livit.ABC.Infraestructure.Mapper;
-using Microsoft.Extensions.DependencyModel;
 using SimpleInjector;
 using Xunit;
 
@@ -46,7 +41,7 @@ namespace Livit.ABC.HumanResources.Tests
 
         {
             var handlerAssemblyName = typeof(RequestAbsenceCommand).AssemblyQualifiedName;
-            var asl = new AssemblyLoader();
+            
             
             var commandStackLibrary = new AssemblyName("Livit.ABC.CommandStack");
             var repositoryLibrary = new AssemblyName("Livit.ABC.Domain");

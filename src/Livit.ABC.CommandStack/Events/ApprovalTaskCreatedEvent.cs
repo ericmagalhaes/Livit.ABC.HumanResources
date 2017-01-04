@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Livit.ABC.Infraestructure.Framework.CQRS;
+﻿using Livit.ABC.Infraestructure.Framework.CQRS;
 
 namespace Livit.ABC.CommandStack.Events
 {

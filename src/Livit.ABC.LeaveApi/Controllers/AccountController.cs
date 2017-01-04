@@ -31,10 +31,18 @@ namespace Livit.ABC.LeaveApi.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
             _employeeRepository = employeeRepository;
         }
+        [HttpGet]
+        [Route("GoogleExternalAuth")]
+        public IActionResult GoogleExternalAuthentication()
+        {
+            var request = HttpContext.Request;
+            var redirect = "${request.Host}"+"/swagger/ui";
+            
+        }
 
         [HttpGet]
         [Route("ExternalLogin")]
-        public async Task<IActionResult> ExternalLogin(string returnUrl)
+        public async Task<IActionResult> ExternalLogin(string provider,string returnUrl)
         {
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info != null)
