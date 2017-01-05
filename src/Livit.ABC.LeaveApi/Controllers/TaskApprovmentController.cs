@@ -3,6 +3,7 @@ using Livit.ABC.CommandStack.Commands;
 using Livit.ABC.Domain.Query;
 using Livit.ABC.Infraestructure.Broker;
 using Livit.ABC.Infraestructure.Framework.CQRS;
+using Livit.ABC.LeaveApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

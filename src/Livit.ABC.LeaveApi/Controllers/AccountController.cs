@@ -64,7 +64,7 @@ namespace Livit.ABC.LeaveApi.Controllers
         public async Task<IActionResult> ExternalLogin([FromQuery]ExternalLoginModel login)
         {
             if (!ModelState.IsValid)
-                return BadRequest(login);
+                return BadRequest(ModelState);
 
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info != null)
@@ -129,7 +129,7 @@ namespace Livit.ABC.LeaveApi.Controllers
         public async Task<IActionResult> Login([FromQuery]LoginViewModel login)
         {
             if (!ModelState.IsValid)
-                return BadRequest(login);
+                return BadRequest(ModelState);
 
             var info = await _signInManager.GetExternalLoginInfoAsync();
             var signedId = _signInManager.IsSignedIn(User);

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:8080/",
+      "applicationUrl": "http://localhost:8080/swagger/ui",
       "sslPort": 0
     }
   },
@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:8080/Account/ExternalLogin?returnUrl=http://localhost:8080/swagger/ui",
+      "launchUrl": "http://localhost:8080/swagger/ui",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
       "commandName": "Project",
       "commandLineArgs": "--server.urls=http://localhost:8080",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:8080/Account/ExternalLogin?returnUrl=http://localhost:8080/swagger/ui",
+      "launchUrl": "http://localhost:8080/swagger/ui",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_URLS": "http://locahost:8080"
@@ -28,9 +28,9 @@
     },
     "dotnet watch": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      "commandLineArgs": "watch run --server.urls http://locahost:8080",
+      "commandLineArgs": "watch run --server.urls http://locahost:8080/swagger/ui",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:8080/",
+      "launchUrl": "http://localhost:8080/swagger/ui",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_URLS": "http://locahost:8080"

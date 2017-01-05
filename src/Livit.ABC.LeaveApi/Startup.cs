@@ -162,7 +162,7 @@ namespace Livit.ABC.LeaveApi
             config.CreateMap<RequestAbsenceCommand, SchedulingRequest>().ConstructUsing((src, dst) => SchedulingRequest.Factory.Create(src.RequestedBy, src.StartDate, src.EndDate, src.Description));
             config.CreateMap<SchedulingRequest, ScheduleInfo>().ConstructUsing((src, dst) => src.ToScheduleInfo());
             config.CreateMap<AbsenceRequest, ScheduleCreatedEvent>().ConstructUsing(ScheduleCreatedEvent.FromAbsenceRequest);
-
+             config.CreateMap<ExternalProviderScheduleCreatedEvent,SchedulingRequestExternalScheduleProviderCreatedEvent > ().ConstructUsing((src,dst)=> ExternalProviderScheduleCreatedEvent.Factory.Create(src.RequestId,src.Provider,src.ScheduleId));
             config.CreateMissingTypeMaps = true;
             
 
