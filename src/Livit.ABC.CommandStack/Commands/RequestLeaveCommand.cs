@@ -5,6 +5,10 @@ namespace Livit.ABC.CommandStack.Commands
     public class RequestLeaveCommand : IdentityCommand
     {
         /// <summary>
+        /// output property
+        /// </summary>
+        public string RequestId { get; internal set; }
+        /// <summary>
         /// left date
         /// </summary>
         public DateTime LeftDate { get; private set; }

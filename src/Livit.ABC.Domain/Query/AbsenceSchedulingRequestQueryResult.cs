@@ -33,5 +33,6 @@ namespace Livit.ABC.Domain.Query
         public DateTime Modified { get; set; }
         public bool IsApproved { get; set; }
         public string Approver { get; set; }
+        public string Description { get; set; }
     }
 }

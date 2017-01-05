@@ -2,20 +2,32 @@
 using System.Threading.Tasks;
 using Livit.ABC.Domain.Persistence;
 using Livit.ABC.LeaveApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Livit.ABC.LeaveApi.Controllers
 {
+
+    /// <summary>
+    /// responsable for external and internal authentication
+    /// </summary>
     [Route("[controller]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmployeeRepository _employeeRepository = null;
-     
+        private readonly IEmployeeRepository _employeeRepository = null;     
         private readonly ILogger _logger;
+
+        /// <summary>
+        /// Account Controller
+        /// </summary>
+        /// <param name="userManager">User management</param>
+        /// <param name="signInManager">Signin manager</param>
+        /// <param name="loggerFactory">Logger</param>
+        /// <param name="employeeRepository">Employee repository</param>
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -29,6 +41,11 @@ namespace Livit.ABC.LeaveApi.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
             _employeeRepository = employeeRepository;
         }
+
+        /// <summary>
+        /// provides a url for web api authentication
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GoogleExternalAuth")]
         public string GoogleExternalAuthentication()
@@ -37,18 +54,25 @@ namespace Livit.ABC.LeaveApi.Controllers
             var redirect = $"{request.Scheme}://{request.Host}/Account/ExternalLogin?provider=Google&returnUrl={request.Scheme}://{request.Host}/Swagger/ui";
             return redirect;
         }
-
+        /// <summary>
+        /// external login method
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("ExternalLogin")]
-        public async Task<IActionResult> ExternalLogin(string provider,string returnUrl)
+        public async Task<IActionResult> ExternalLogin([FromQuery]ExternalLoginModel login)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(login);
+
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info != null)
             {
-                return RedirectToAction("ExternalLoginCallback",new {returnUrl});
+                return RedirectToAction("ExternalLoginCallback",new {login.ReturnUrl});
             }
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { login.ReturnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
             return Challenge(properties, "Google");
         }
@@ -81,32 +105,47 @@ namespace Livit.ABC.LeaveApi.Controllers
             
             return Redirect(returnUrl);
         }
+        /// <summary>
+        /// provider an url for manager login
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("LoginUrl")]
+        public string  LoginUrl()
+        {
+            var request = HttpContext.Request;
+            var redirect = $"{request.Scheme}://{request.Host}/Account/Login?UserName=manager@livit.com&password=@Manag3r&returnUrl={request.Scheme}://{request.Host}/Swagger/ui";
+            return redirect;
+        }
+        /// <summary>
+        /// login method
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromQuery]LoginViewModel login)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(login);
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            var signedId = _signInManager.IsSignedIn(User);
+            if (info != null || signedId)
+            {
+                await _signInManager.SignOutAsync();
+            }
+            var result = await _signInManager.PasswordSignInAsync(login.UserName, login.Password, false, false);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation(1, "User logged in.");
+                return Redirect(login.ReturnUrl);
+            }
+            return BadRequest("User not found");
+        }
         
 
-
-
-
-
-        #region Helpers
-
-
-        private Task<ApplicationUser> GetCurrentUserAsync()
-        {
-            return _userManager.GetUserAsync(HttpContext.User);
-        }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(this.ExternalLogin), "Home");
-            }
-        }
-
-        #endregion
     }
 }

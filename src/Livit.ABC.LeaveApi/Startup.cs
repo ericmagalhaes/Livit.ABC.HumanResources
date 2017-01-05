@@ -67,12 +67,16 @@ namespace Livit.ABC.LeaveApi
                 .AddDefaultTokenProviders();
            
             services.AddTransient<AccessTokenService>();
-            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
+           // services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
             // Add framework services.
             services.AddDistributedMemoryCache();
             services.AddSession();
 
             services.AddMvc();
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("RequireManagerRole", policy => policy.RequireRole("Manager"));
+            //});
             services.AddSwaggerGen();
 
             services.AddSingleton<IControllerActivator>(
@@ -101,8 +105,24 @@ namespace Livit.ABC.LeaveApi
             #endregion
 
             var appDb = _container.GetInstance<ApplicationDbContext>();
-            appDb.Database.EnsureDeleted();
-            appDb.Database.EnsureCreated();
+            //appDb.Database.EnsureDeleted();
+            if (appDb.Database.EnsureCreated())
+            {
+                var employeeRepository = _container.GetInstance<IEmployeeRepository>();
+                var employee = employeeRepository.RegisterEmployee("manager@livit.com");
+
+                var userManager = _container.GetInstance<UserManager<ApplicationUser>>();
+
+                var managerUser = new ApplicationUser();
+                managerUser.UserName = employee.Id;
+                managerUser.Email = employee.Id;
+                userManager.CreateAsync(managerUser, "@Manag3r").Wait();
+                userManager.AddClaimAsync(managerUser, new Claim(ClaimTypes.Role, "Manager")).Wait();
+            }
+
+           
+            
+
             app.UseIdentity();
 
             var googleOptions = new GoogleOptions();
@@ -131,16 +151,10 @@ namespace Livit.ABC.LeaveApi
         }
         private void InitDb(Repository repository)
         {
-            repository.Database.EnsureDeleted();
+            //repository.Database.EnsureDeleted();
             repository.Database.EnsureCreated();
 
-            if (!repository.Employees.Any())
-            {
-                var manager = new Employee();
-                manager.Id = "manager@livit.com";
-                repository.Employees.Add(manager);
-                repository.SaveChanges();
-            }
+
 
         }
         private void InitMapper(MapperConfigurationExpression config)
@@ -186,6 +200,7 @@ namespace Livit.ABC.LeaveApi
             }
             _container.Register<IQueryDispatcher,QueryDispatcher>();
             _container.Register(typeof(IQueryHandler<,>), typeof(HumanResourcesQueryHandler));
+            _container.Register(typeof(IQueryHandler<,>), typeof(TaskApprovmentQueryHandler));
             //container.RegisterCollection(typeof(IRepository), repositoryTypes);
             _container.Register<IBus, SimpleInjectorBus>();
             _container.Register(() => _container);

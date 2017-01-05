@@ -3,10 +3,12 @@ using Livit.ABC.CommandStack.Commands;
 using Livit.ABC.Domain.Query;
 using Livit.ABC.Infraestructure.Broker;
 using Livit.ABC.Infraestructure.Framework.CQRS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Livit.ABC.LeaveApi.Controllers
 {
+    [Authorize(Roles = "Manager")]
     [Route("api/[controller]")]
     public class TaskApprovmentController : Controller
     {
@@ -18,7 +20,6 @@ namespace Livit.ABC.LeaveApi.Controllers
             _queryDispatcher = queryDispatcher;
         }
         [HttpPost]
-        [Route("TaskApprovment")]
         public void RequestAbsence([FromBody]RequestApprovment request)
         {
             var userName = SecurityInfo.GetUserIdentity(User);
@@ -33,8 +34,7 @@ namespace Livit.ABC.LeaveApi.Controllers
         }
 
         [HttpGet]
-        [Route("TaskApprovment/{id}")]
-        public TaskApprovmentRequestQueryResult RequestAbsence(TaskApprovmentRequestQuery query)
+        public TaskApprovmentRequestQueryResult RequestAbsence([FromQuery]TaskApprovmentRequestQuery query)
         {
             return _queryDispatcher.Dispatch<TaskApprovmentRequestQuery, TaskApprovmentRequestQueryResult>(query);
         }
