@@ -3,6 +3,9 @@ using Livit.ABC.Infraestructure.Framework.CQRS;
 
 namespace Livit.ABC.CommandStack.Events
 {
+    /// <summary>
+    /// leave create event
+    /// </summary>
     public class LeaveCreatedEvent : Event
     {
         public LeaveCreatedEvent(Guid requestId, string leaveId)

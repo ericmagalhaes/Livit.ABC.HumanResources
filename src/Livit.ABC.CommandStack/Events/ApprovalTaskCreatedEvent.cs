@@ -2,6 +2,9 @@
 
 namespace Livit.ABC.CommandStack.Events
 {
+    /// <summary>
+    /// created when a manager approves a request
+    /// </summary>
     public class ApprovalTaskCreatedEvent : Event
     {
         public ApprovalTaskCreatedEvent(string requestId, string approvalTaskId)

@@ -2,6 +2,9 @@
 
 namespace Livit.ABC.Leave.BDD.tests
 {
+    /// <summary>
+    /// I would use selenium web driver for tests, but I do not have time.
+    /// </summary>
     [Binding]
     public class AbsenceRequestSteps
     {

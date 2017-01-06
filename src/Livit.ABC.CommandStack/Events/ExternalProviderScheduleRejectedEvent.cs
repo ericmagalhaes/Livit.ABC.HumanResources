@@ -2,6 +2,9 @@
 
 namespace Livit.ABC.CommandStack.Events
 {
+    /// <summary>
+    /// created when a schedule is rejected by provider
+    /// </summary>
     public class ExternalProviderScheduleRejectedEvent : Event
     {
         public ExternalProviderScheduleRejectedEvent(string requestId, string provider, string scheduleId)

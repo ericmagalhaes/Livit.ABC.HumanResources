@@ -3,7 +3,7 @@ using Livit.ABC.Infraestructure.Framework.CQRS;
 
 namespace Livit.ABC.Domain.Query
 {
-    public class AbsenceSchedulingRequestQueryResult : IQueryResult
+    public class LeaveSchedulingRequestQueryResult : IQueryResult
     {
         public string Id { get; set; }
         public string RequestedBy { get; set; }
@@ -16,17 +16,6 @@ namespace Livit.ABC.Domain.Query
         public string Description { get; set; }
         public string Provider { get; set; }
         public string ProvideScheduleId { get; set; }
-
     }
-
-    public class TaskApprovmentRequestQueryResult : IQueryResult
-    {
-        public string Id { get; set; }
-        public string RequestedBy { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Modified { get; set; }
-        public bool IsApproved { get; set; }
-        public string Approver { get; set; }
-        public string Description { get; set; }
-    }
+    
 }

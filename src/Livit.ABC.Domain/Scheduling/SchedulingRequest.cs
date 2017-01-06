@@ -48,7 +48,8 @@ namespace Livit.ABC.Domain.Scheduling
                 Id = Guid.NewGuid().ToString(),
                 TaskActivity = task,
                 StartDate = StartDate,
-                EndDate = EndDate
+                EndDate = EndDate,
+                Description = Description
             };
             
             return scheduleInfo;

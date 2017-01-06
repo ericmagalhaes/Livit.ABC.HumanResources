@@ -1,5 +1,8 @@
 ﻿namespace Livit.ABC.CommandStack.Commands
 {
+    /// <summary>
+    /// request an approvment
+    /// </summary>
     public class RequestApprovmentCommand : IdentityCommand
     {
         public RequestApprovmentCommand(string requestedBy, string humanResourcesRequestId, bool isApproved, string managerId) : base(requestedBy)

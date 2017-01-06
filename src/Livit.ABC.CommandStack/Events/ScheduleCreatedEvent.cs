@@ -4,6 +4,9 @@ using Livit.ABC.Infraestructure.Framework.CQRS;
 
 namespace Livit.ABC.CommandStack.Events
 {
+    /// <summary>
+    /// schedule create event
+    /// </summary>
     public class ScheduleCreatedEvent : Event
     {
         public ScheduleCreatedEvent(string requestId, string requestedBy, bool needsApproval, DateTime? startDate, DateTime? endDate)
@@ -22,6 +25,16 @@ namespace Livit.ABC.CommandStack.Events
         public DateTime? EndDate { get; private set; }
 
         public static ScheduleCreatedEvent FromAbsenceRequest(AbsenceRequest request)
+        {
+            var evt = new ScheduleCreatedEvent(
+                request.Id,
+                request.RequestedBy,
+                request.NeedsApproval,
+                request.StartDate,
+                request.EndDate);
+            return evt;
+        }
+        public static ScheduleCreatedEvent FromLeaveRequest(LeaveRequest request)
         {
             var evt = new ScheduleCreatedEvent(
                 request.Id,

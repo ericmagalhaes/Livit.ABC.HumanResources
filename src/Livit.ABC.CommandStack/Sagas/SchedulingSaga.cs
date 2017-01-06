@@ -64,7 +64,7 @@ namespace Livit.ABC.CommandStack.Sagas
                 Bus.RaiseEvent(rejected);
                 return;
             }
-
+            message.RequestId = response.RequestId.ToString();
             var leaveRequest = LeaveRequest.Factory.Create(
                 response.AggregateId,
                 request.RequestedBy,

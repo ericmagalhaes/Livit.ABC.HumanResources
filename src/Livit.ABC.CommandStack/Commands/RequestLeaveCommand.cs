@@ -2,6 +2,9 @@
 
 namespace Livit.ABC.CommandStack.Commands
 {
+    /// <summary>
+    /// request leave
+    /// </summary>
     public class RequestLeaveCommand : IdentityCommand
     {
         /// <summary>
@@ -14,6 +17,10 @@ namespace Livit.ABC.CommandStack.Commands
         public DateTime LeftDate { get; private set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
         /// Initiate a new leave command
         /// </summary>
         /// <param name="requestedBy">request user id </param>
@@ -21,6 +28,7 @@ namespace Livit.ABC.CommandStack.Commands
         public RequestLeaveCommand(string requestedBy, DateTime leftDate) : base(requestedBy)
         {
             LeftDate = leftDate;
+            Description = $"User {RequestedBy} request a left date at {LeftDate}";
         }
     }
 }

@@ -47,8 +47,7 @@ namespace Livit.ABC.LeaveApi.Controllers
 
             _bus.Send(command);
             var id = command.RequestId;
-            var query = new AbsenceSchedulingRequestQuery();
-            query.Id = id;
+           
             return CreatedAtRoute("GetRequestAbsence", new {id}, id);
         }
 
@@ -72,6 +71,7 @@ namespace Livit.ABC.LeaveApi.Controllers
         /// <param name="request"></param>
         [HttpPost]
         [Route("Leave")]
+        [Produces(typeof(LeaveSchedulingRequestQueryResult))]
         public IActionResult RequestLeave([FromBody]RequestLeave request)
         {
             var userName = SecurityInfo.GetUserIdentity(User);
@@ -80,20 +80,20 @@ namespace Livit.ABC.LeaveApi.Controllers
                 request.LeftDate);
             _bus.Send(command);
             var id = command.RequestId;
-            var query = new AbsenceSchedulingRequestQuery();
-            query.Id = id;
             return CreatedAtRoute("GetRequestLeave", new { id }, id);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("Leave/{id}",Name="GetRequestLeave")]
-        public LeaveSchedulingRequestQueryResult RequestLeave(LeaveSchedulingRequestQuery query)
+        public LeaveSchedulingRequestQueryResult RequestLeave(string id)
         {
+            var query = new LeaveSchedulingRequestQuery();
+            query.Id = id;
             return _queryDispatcher.Dispatch<LeaveSchedulingRequestQuery, LeaveSchedulingRequestQueryResult>(query);
         }
 

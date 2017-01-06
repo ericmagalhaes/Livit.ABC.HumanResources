@@ -2,6 +2,9 @@
 
 namespace Livit.ABC.CommandStack.Events
 {
+    /// <summary>
+    /// created when a request is denied
+    /// </summary>
     public class ApprovalTaskRejectedEvent : Event
     {
         public ApprovalTaskRejectedEvent(string requestId, string description)

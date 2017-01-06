@@ -2,6 +2,9 @@
 
 namespace Livit.ABC.CommandStack.Commands
 {
+    /// <summary>
+    /// request an absence
+    /// </summary>
     public class RequestAbsenceCommand : IdentityCommand
     {
         /// <summary>
@@ -33,6 +36,7 @@ namespace Livit.ABC.CommandStack.Commands
         {
             StartDate = startDate;
             EndDate = endDate;
-        }
+            Description = $"User {RequestedBy} request an absence period from {StartDate} to {EndDate}";
+    }
     }
 }

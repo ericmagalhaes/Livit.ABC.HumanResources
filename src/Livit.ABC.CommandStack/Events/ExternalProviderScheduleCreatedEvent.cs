@@ -3,6 +3,9 @@ using Livit.ABC.Infraestructure.Framework.CQRS;
 
 namespace Livit.ABC.CommandStack.Events
 {
+    /// <summary>
+    /// created when an external provider creates a schedule
+    /// </summary>
     public class ExternalProviderScheduleCreatedEvent : Event
     {
         public ExternalProviderScheduleCreatedEvent(string requestId, string provider, string scheduleId)

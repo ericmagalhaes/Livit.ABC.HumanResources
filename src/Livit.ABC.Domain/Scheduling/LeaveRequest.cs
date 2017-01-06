@@ -17,6 +17,7 @@ namespace Livit.ABC.Domain.Scheduling
 
         public LeaveRequest(string id, bool needsApproval, DateTime created, DateTime modified, string requestedBy, DateTime endDate, string modifiedBy = null) : base(id, needsApproval, created, modified, requestedBy, DateTime.MinValue, endDate, modifiedBy)
         {
+            
         }
         public class Factory
         {
