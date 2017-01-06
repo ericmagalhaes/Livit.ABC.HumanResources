@@ -9,7 +9,7 @@ The solution is organized in four projects<br/>
   <li>Livit.ABC.Infraestructure - Cross cutting concers</li>
   <li>Livit.ABC.LeaveApi - ASP.NET Core WebApi</li>
 </ul>
-
+I will finish this read me today 06/01
 
 
 
